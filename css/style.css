@@ -1,0 +1,207 @@
+*{
+
+    margin: 0;
+    padding: 0%;
+
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #151320;
+}
+
+.box {
+
+    position: relative;
+    width: 40vh;
+    height: 60vh;
+    color: #fff;
+    background-color: #000;
+    font: 700;
+    line-height: 27vh;
+    text-align: center;
+    font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-size: 30px;
+     
+}
+.box::before,
+.box::after{
+
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    top: -15px;
+    left: -15px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #240358, #ff00bf, #0099ff, #001aff, #ff0000, #ff0055, #ff0000, #0099ff, #00a1ff, #a200ff);
+
+    background-size: 300%;
+    animation: border 12s linear infinite;
+
+}
+.box::after{
+
+    filter: blur(50px);
+
+}
+@keyframes border {
+
+    0%, 100%{
+        background-position: 0 0;
+    }
+    5%{
+        background-position: 300%;
+    }
+}
+/*----------------------------*/
+
+input[type="text"]:hover {
+  border: 3px solid #151320;
+}
+
+
+
+input::placeholder {
+  text-align: center;
+}
+
+input {  margin-left: 5%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  width: 90%;
+  max-width: 400px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2vh;
+  margin-top: 1vh;
+  margin-left: 5%;
+  color: #fafafa;
+  border-radius: 5px;
+  height: 6vh;
+  background: #171616;
+  display: block;
+  margin-bottom: 10px;
+}
+/*----------------------------*/
+.box h6{
+margin-bottom: -20vh;
+margin-top: -10vh;
+padding-bottom: 6vh;
+height: 40vh;
+}
+
+/*---------------------------*/
+.bi{
+    padding: 0;
+    margin-left: 25%;
+    border: none;
+    background: none;
+  }
+  
+  .bi {
+    --primary-color: #111;
+    --hovered-color: #410303;
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    font-size: 2vw;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .bi p {
+    margin: 0;
+    position: relative;
+    font-size: 2vw;
+    color: var(--primary-color)
+  }
+  
+  .bi::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    bottom: -0.35vw;
+    background: var(--hovered-color);
+    height: 0.1vw;
+    transition: 0.3s ease-out;
+  }
+  
+  .bi p::before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    inset: 0;
+    color: var(--hovered-color);
+    overflow: hidden;
+    transition: 0.3s ease-out;
+  }
+  
+  .bi:hover::after {
+    width: 100%;
+  }
+  
+  .bi:hover p::before {
+    width: 100%;
+  }
+  
+  .bi:hover svg {
+    transform: translateX(0.4vw);
+    color: var(--hovered-color)
+  }
+  
+  .bi svg {
+    color: var(--primary-color);
+    transition: 0.2s;
+    position: relative;
+    width: 1.5vw;
+    transition-delay: 0.2s;
+  }
+  button {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2vh;
+    position: relative;
+    width: 15vw;
+    height: 5vh;
+    border-radius: 10vh;
+    border-radius: 5px;
+    background: #171616;
+    color: #fafafa;
+    animation: border 1s linear infinite;
+    margin-bottom: 20vh;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: 'Formulário?';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -10px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 5.8vw;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
