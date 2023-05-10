@@ -18,48 +18,64 @@ function CPFcalc($cpf) {
     return true;
 }
 
-$errors = array();
-$fields = array('nome', 'email', 'cpf');
 
-if (isset($_POST['nome'], $_POST['email'], $_POST['cpf'])) {
-    if ($_POST['nome'] != "" && $_POST['email'] != "" && $_POST['cpf'] != "") {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $cpf = $_POST['cpf'];
+
+$cpfErro="";
+$nomeErro="";
+$emailErro ="";
+
+
+
+if (isset($_POST["nome"], $_POST["email"], $_POST["cpf"])) {
+    if ($_POST["nome"] != "" && $_POST["email"] != "" && $_POST["cpf"] != "") {
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $cpf = $_POST["cpf"];
 
         // Validar campo de email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "O email fornecido não é válido.";
+                $emailErro = "O email fornecido não é válido.";
+                $email = "0";
+        }else {
+            $emailErro = "Válido";
         }
 
         // Validar campo de cpf
         $cpfValidationResult = CPFcalc($cpf);
         if ($cpfValidationResult !== true) {
-            $errors[] = $cpfValidationResult;
+           $cpfErro = $cpfValidationResult;
+           $cpf = "0";
+        } else {
+            $cpfErro= "Válido";
         }
 
         // Validar campo de nome
         if (!preg_match('/^[a-zA-Z]{3,}$/', $nome)) {
-            $errors[] = "O nome fornecido deve conter no mínimo 3 letras.";
+            $nomeErro = "O Nome deve conter 3 letras ou mais.";
+            $nome = "0";
+        }else {
+            $nomeErro = "Válido";
+        
         }
 
-        if (empty($errors)) {
-            // Retornar os dados em formato JSON
-            $response = array(
-                'nome' => $nome,
-                'email' => $email,
-                'cpf' => $cpf
-            );
-            echo json_encode($response);
-        } else {
-            $errorMessage = "Erros encontrados:\n";
-            foreach ($errors as $error) {
-                $errorMessage .= $error . "\n";
-            }
-            echo json_encode(array('error' => $errorMessage));
+
+
+        $aux = json_encode(array(
+        "nome" => $nome,
+        "nomeE" => $nomeErro,
+        "cpf" => $cpf,
+        "cpfE" => $cpfErro,
+        "email" => $email,
+        "emailE" => $emailErro,
+        )
+        
+        );
+
+        echo $aux;
+
         }
     }
-}
+
 
 
 

@@ -11,7 +11,17 @@ body{
     align-items: center;
     min-height: 100vh;
     background-color: #151320;
+    flex-direction: column;
+    
 }
+
+#mensagem {
+
+  margin-top: 7.5%;
+
+}
+
+/* ------------------------------------------------  box  ------------------------------------------------ */
 
 .box {
 
@@ -27,8 +37,8 @@ body{
     text-transform: uppercase;
     border-radius: 3px;
     font-size: 30px;
-     
 }
+
 .box::before,
 .box::after{
 
@@ -60,8 +70,7 @@ body{
         background-position: 300%;
     }
 }
-/*----------------------------*/
-
+/* ------------------------------------------------  inputs  ------------------------------------------------ */
 input[type="text"]:hover {
   border: 3px solid #151320;
 }
@@ -92,7 +101,8 @@ input {  margin-left: 5%;
   display: block;
   margin-bottom: 10px;
 }
-/*----------------------------*/
+/* ------------------------------------------------  box  ------------------------------------------------ */
+
 .box h6{
 margin-bottom: -20vh;
 margin-top: -10vh;
@@ -100,7 +110,7 @@ padding-bottom: 6vh;
 height: 40vh;
 }
 
-/*---------------------------*/
+/* ------------------------------------------------ button ------------------------------------------------ */
 .bi{
     padding: 0;
     margin-left: 25%;
@@ -204,4 +214,25 @@ height: 40vh;
   .button:hover span:after {
     opacity: 1;
     right: 0;
+  }
+
+/* ------------------------------------------------ alerta js  ------------------------------------------------ */
+  .DIValert {
+  position: relative; /* Certifique-se de que a div tenha um posicionamento definido */
+  padding: 4vh;
+  background: hsla(0, 0%, 100%, 0.1);
+  border-radius: 6vh;
+  width: 30vh;
+  height: 8vh;
+  color: #ccc;
+  margin-top: 5vh;
+  }
+  
+  
+  
+  .DIValert h4 {
+
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
   }

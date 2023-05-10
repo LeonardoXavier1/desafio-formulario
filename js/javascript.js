@@ -6,31 +6,22 @@ document.querySelector('form').addEventListener('submit', function(event) {
   const cpf = document.getElementById('cpf').value;
   const mensagem = document.getElementById('mensagem');
 
-// function addELement(){
-//   const div = document.createElement('div');
+  //AVISO 
+  const div= document.createElement('div');
+  div.classList.add('DIValert');
+  const div2= document.createElement('div');
+  div.classList.add('DIV2');
+  const h4 = document.createElement('h4');
+ 
 
-//   const FEEDBACK = document.createTextNode("FeedBack!");
-//   div.appendChild(FEEDBACK);
-//   const currentDiv = document.getElementById("div1");
-//   document.body.insertBefore(div, currentDiv);
 
-//   const container = document.createElement('container');
-//   const div2 = document.createElement('div');
-//   const p = document.createElement('p');
-// }
-  
-
-  // Verificar se os campos foram preenchidos corretamente
-//   if (nome === '' || email === '' || cpf === '') {
-//     mensagem.textContent = 'Por favor, preencha todos os campos.';
-//     return;
-// }
-
-// Validar o CPF
-if (!validarCPF(cpf)) {
-    mensagem.innerHTML = 'CPF inválido. Por favor, verifique o CPF informado.';
-    return;
+function retornaMSG(){
+    window.location.href="index.html"
 }
+
+
+
+
 
 // Enviar os dados para o servidor usando o fetch
 fetch('back.php', {
@@ -39,32 +30,54 @@ fetch('back.php', {
 })
     .then(response => {
         if (response.ok) {
-            return response.json(); // Transformar a resposta em formato JSON
+            return response.json(); // Transform the response into JSON format
         } else {
-            throw new Error('Erro ao enviar dados.');
+            throw new Error('Error sending data.');
         }
     })
     .then(data => {
-        if (data.error) {
-            mensagem.textContent = data.error; // Exibir mensagem de erro no HTML
+        const obj = Object.values(data)
+        let temp = ``
+        if (obj.includes("0")) {
+if ((obj[0] == "0")&& (obj[2] == "0") && obj[4]=="0"){   //nome cpf
+    temp = obj[1] + `<br>` + obj[3] + `<br>` + obj [5] 
+}           
+ else if ((obj[2] == "0")&& (obj[4] == "0")){   //email cpf
+    temp = obj[3] + `<br>` + obj[5] + `<br>`
+}else if ((obj[0] == "0")&& (obj[4] == "0")){   //email nome
+    temp = obj[1] + `<br>` + + obj[5] + `<br>` 
+}
+else if ((obj[0] == "0")&& (obj[2] == "0")){   //nome cpf
+    temp = obj[1] + `<br>` + obj[3] + `<br>`
+}else if (obj[4] == "0"){
+    temp = obj[5] + `<br>`   
+}else if(obj[2] == "0") {    
+    temp = obj[3] + `<br>`
+}else if (obj[0] == "0"){
+    temp = obj[1] + `<br>`}
+console.log(temp);
+
+            h4.innerHTML = temp
+
+            
         } else {
-            mensagem.textContent = `Nome: ${data.nome}, E-mail: ${data.email}, CPF: ${data.cpf}`; // Exibir os dados no HTML
-        }
+            h4.innerHTML = `Cadastro efetuado com sucesso`
+            }
+            div2.appendChild(h4);
+            div.appendChild(div2);
+            document.body.appendChild(div);
+            setTimeout(() => {
+                retornaMSG();
+            }, 5000);
+       
     })
     .catch(error => {
-        mensagem.textContent = 'Erro: ' + error.message;
-    });
-});
-
-function validarCPF(cpf) {
-// Implemente aqui a lógica de validação do CPF
-// ...
-return true; // Retorne true se o CPF for válido, caso contrário, retorne false
-}
+        console.error('Error:', error);
+    });})
+       
   
 
-
-
+    
 // function exibirMensagem(mensagem) {
 //     const mensagemElement = document.getElementById('mensagem');
 //     mensagemElement.textContent = mensagem;
@@ -102,8 +115,3 @@ return true; // Retorne true se o CPF for válido, caso contrário, retorne fals
 //     // Se houve algum erro no fetch, mostrar mensagem de erro
 //     alert('Erro no fetch: ' + error.message);
 //   });
-
-
-
-
-  
