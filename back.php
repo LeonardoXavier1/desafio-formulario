@@ -6,6 +6,13 @@ function CPFcalc($cpf) {
     if (strlen($cpf) != 11) {
         return "O CPF deve conter exatamente 11 dígitos.";
     }
+    
+    // Verificar se todos os dígitos são iguais
+    if (preg_match('/^(\d)\1*$/', $cpf)) {
+        return "O CPF não pode ter todos os dígitos iguais.";
+    }
+    
+    // Continuar com a validação existente
     for ($t = 9; $t < 11; $t++) {
         for ($d = 0, $c = 0; $c < $t; $c++) {
             $d += $cpf[$c] * (($t + 1) - $c);
@@ -71,10 +78,36 @@ if (isset($_POST["nome"], $_POST["email"], $_POST["cpf"])) {
         
         );
 
-        echo $aux;
+        // Se não houver erros de validação, adicionar os dados a um array associativo
+        if ($cpfErro === "Válido" && $nomeErro === "Válido" && $emailErro === "Válido") {
+            $data = array(
+                "nome" => $nome,
+                "email" => $email,
+                "cpf" => $cpf
+            );
 
+            // Converter o array associativo em formato JSON e salvar no arquivo data.json
+            $json_data = json_encode($data);
+            file_put_contents('SaveInfo.json', $json_data);
         }
+
+        // Montar o array com as informações de validação
+        $validationData = array(
+            "nome" => $nome,
+            "nomeE" => $nomeErro,
+            "cpf" => $cpf,
+            "cpfE" => $cpfErro,
+            "email" => $email,
+            "emailE" => $emailErro
+        );
+
+        // Converter o array em JSON e retornar como resposta
+        echo json_encode($validationData);
     }
+}
+
+        
+    
 
 
 

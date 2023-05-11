@@ -1,4 +1,14 @@
-document.querySelector('form').addEventListener('submit', function(event) {
+const cpfInput = document.getElementById("cpf");
+  
+  cpfInput.addEventListener("input", function(event) {
+        let cpf = event.target.value;
+        cpf = cpf.replace(/\D/g, ""); 
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2"); 
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2"); 
+        cpf = cpf.replace(/(\d{3})(\d{2})$/, "$1-$2"); 
+        event.target.value = cpf;
+  });
+  document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
 
   const nome = document.getElementById('nome').value;
@@ -6,6 +16,8 @@ document.querySelector('form').addEventListener('submit', function(event) {
   const cpf = document.getElementById('cpf').value;
   const mensagem = document.getElementById('mensagem');
 
+  
+  
   //AVISO 
   const div= document.createElement('div');
   div.classList.add('DIValert');
