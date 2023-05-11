@@ -18,6 +18,7 @@ const cpfInput = document.getElementById("cpf");
 
   
   
+  
   //AVISO 
   const div= document.createElement('div');
   div.classList.add('DIValert');
