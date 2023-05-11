@@ -1,13 +1,26 @@
 const cpfInput = document.getElementById("cpf");
+
+cpfInput.addEventListener("input", function(event) {
+  let cpf = event.target.value;
   
-  cpfInput.addEventListener("input", function(event) {
-        let cpf = event.target.value;
-        cpf = cpf.replace(/\D/g, ""); 
-        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2"); 
-        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2"); 
-        cpf = cpf.replace(/(\d{3})(\d{2})$/, "$1-$2"); 
-        event.target.value = cpf;
-  });
+  // Remover todos os caracteres não numéricos
+  cpf = cpf.replace(/\D/g, "");
+  
+  // Aplicar a formatação do CPF
+  let formattedCpf = "";
+  for (let i = 0; i < cpf.length; i++) {
+    if (i === 3 || i === 6) {
+      formattedCpf += ".";
+    } else if (i === 9) {
+      formattedCpf += "-";
+    }
+    formattedCpf += cpf[i];
+  }
+
+  // Atualiza o campo com a formatação do CPF
+  event.target.value = formattedCpf;
+});
+
   document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -20,7 +33,7 @@ const cpfInput = document.getElementById("cpf");
   
 
   
-  //AVISO 
+  //alerta 
   const div= document.createElement('div');
   div.classList.add('DIValert');
   const div2= document.createElement('div');
@@ -37,14 +50,14 @@ function retornaMSG(){
 
 
 
-// Enviar os dados para o servidor usando o fetch
+// Enviar os dados para o back usando o fetch
 fetch('back.php', {
     method: 'POST',
     body: new FormData(document.querySelector('form'))
 })
     .then(response => {
         if (response.ok) {
-            return response.json(); // Transform the response into JSON format
+            return response.json();  // transforma em formato json a resposta
         } else {
             throw new Error('Error sending data.');
         }
@@ -53,12 +66,12 @@ fetch('back.php', {
         const obj = Object.values(data)
         let temp = ``
         if (obj.includes("0")) {
-if ((obj[0] == "0")&& (obj[2] == "0") && obj[4]=="0"){   //nome cpf
+if ((obj[0] == "0")&& (obj[2] == "0") && obj[4]=="0"){   //nome cpf email
     temp = obj[1] + `<br>` + obj[3] + `<br>` + obj [5] 
 }           
- else if ((obj[2] == "0")&& (obj[4] == "0")){   //email cpf
+ else if ((obj[2] == "0")&& (obj[4] == "0")){   //cpf email
     temp = obj[3] + `<br>` + obj[5] + `<br>`
-}else if ((obj[0] == "0")&& (obj[4] == "0")){   //email nome
+}else if ((obj[0] == "0")&& (obj[4] == "0")){   //nome  email
     temp = obj[1] + `<br>` + + obj[5] + `<br>` 
 }
 else if ((obj[0] == "0")&& (obj[2] == "0")){   //nome cpf

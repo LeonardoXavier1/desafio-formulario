@@ -13,13 +13,13 @@ function CPFcalc($cpf) {
     }
     
     // Continuar com a validação existente
-    for ($t = 9; $t < 11; $t++) {
-        for ($d = 0, $c = 0; $c < $t; $c++) {
-            $d += $cpf[$c] * (($t + 1) - $c);
+    for ($t = 9; $t < 11; $t++) {                           /* -> t recebe valor de 9 e 10 */
+        for ($d = 0, $c = 0; $c < $t; $c++) {               /* -> t d e c recebem valor */                  
+            $d += $cpf[$c] * (($t + 1) - $c);               /* -> multiplicação do valor do CPF e o seu peso */            
         }
-        $d = ((10 * $d) % 11) % 10;
-        if ($cpf[$c] != $d) {
-            return "O CPF fornecido não é válido.";
+        $d = ((10 * $d) % 11) % 10;                         /* -> d recebe valor do calculo */        
+        if ($cpf[$c] != $d) {                               /* -> se d diferente de cpf emt false*/                        
+            return "O CPF fornecido não é válido.";                             
         }
     }
     return true;
