@@ -11,13 +11,14 @@ const cpfInput = document.getElementById("cpf");
   document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
 
+  
   const nome = document.getElementById('nome').value;
   const email = document.getElementById('email').value;
   const cpf = document.getElementById('cpf').value;
   const mensagem = document.getElementById('mensagem');
 
   
-  
+
   
   //AVISO 
   const div= document.createElement('div');
